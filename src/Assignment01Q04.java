@@ -2,8 +2,32 @@ import java.util.Arrays;
 
 public class Assignment01Q04 {
 
+    private static void reverse(int[] array, int left, int right){
+        while(left < right){
+            int x = array[left], y = array[right];
+            array[left] = y;
+            array[right] = x;
+            left++;
+            right--;
+        }
+    }
+
     public static int[] shiftArrayCyclic(int[] array, int move, char direction) {
-        // TODO: implement
+        int len = array.length;
+
+        if((direction != 'R' && direction != 'L') || len == 0) {
+            return array;
+        }
+        if(direction == 'R') {
+            move *= -1;
+        }
+
+        int shift = (move + len) % len;
+
+        reverse(array, 0, shift-1);
+        reverse(array, shift, len-1);
+        reverse(array, 0, len-1);
+
         return array;
     }
 
